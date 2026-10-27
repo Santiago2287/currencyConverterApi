@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from app.routers import currency_route
+import redis.asyncio as redis
 
 app = FastAPI(
     title="Currency Converter API",

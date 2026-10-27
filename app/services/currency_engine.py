@@ -1,5 +1,10 @@
 import httpx
 from app.services.exceptions import CurrencyNetworkError, CurrencyDataError
+import redis.asyncio as redis
+import json
+
+# Conexión asíncrona al contenedor de Redis
+redis_client = redis.from_url("redis://redis:6379/0", decode_responses=True)
 
 async def get_converted_amount(from_currency: str, to_currency: str, amount: float) -> dict:
     #formamos la cadena del cosulta

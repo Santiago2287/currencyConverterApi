@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  # Tu aplicacion de FastAPI
+  api:
+    build: .
+    container_name: currency_api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+    environment:
+      # Asi es como FastAPI encuentra a Redis dentro de la red de Docker
+      - REDIS_URL=redis://redis:6379/0
+
+  # El pizarron ultrarrapido
+  redis:
+    image: redis:7-alpine
+    container_name: divisa_cache
+    restart: always
+    ports:
+      - "6379:6379"
